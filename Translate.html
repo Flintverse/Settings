@@ -109,8 +109,9 @@ const NAV=[
   {id:'metafield',label:'Metafield'},
   {id:'grid',label:'Filter & Product Grid Design'},{id:'settings',label:'Settings'},
   {id:'analytics',label:'Analytics'},{id:'advanced',label:'Advanced Features'},
+  {id:'storefront',label:'Storefront Preview'},
 ];
-const ENABLED=new Set(['settings','metafield','search']);
+const ENABLED=new Set(['settings','metafield','search','storefront']);
 const ACTIVE='settings';
 let col=false;
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -125,6 +126,7 @@ function renderNav(){
       if(v==='settings')location.href='index.html';
       else if(v==='metafield')location.href='Metafield.html';
       else if(v==='search')location.href='Search.html';
+      else if(v==='storefront')location.href='StoreFront.html';
     };
   });
   updateSb();

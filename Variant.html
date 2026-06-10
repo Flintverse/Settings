@@ -49,7 +49,7 @@ a{color:var(--lnk)}
 .btn-s:hover{box-shadow:var(--shbtn-hov)}
 .back-a{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--r2);text-decoration:none;border:1px solid var(--bdr);background:var(--sf);color:var(--text2);box-shadow:var(--sh1);flex-shrink:0;transition:background .1s}
 .back-a:hover{background:var(--sf-hov)}
-.card{background:var(--sf);border-radius:var(--r2);box-shadow:var(--sh3);overflow:hidden}
+.card{background:var(--sf);border-radius:var(--r2);box-shadow:var(--sh3);overflow:visible}
 .card-hd{padding:16px;border-bottom:1px solid var(--bdr)}
 .card-hd-ttl{font-size:13px;font-weight:650}
 .card-hd-sub{font-size:12px;color:var(--text2);margin-top:2px}
@@ -151,8 +151,9 @@ const NAV=[
   {id:'metafield',label:'Metafield'},
   {id:'grid',label:'Filter & Product Grid Design'},{id:'settings',label:'Settings'},
   {id:'analytics',label:'Analytics'},{id:'advanced',label:'Advanced Features'},
+  {id:'storefront',label:'Storefront Preview'},
 ];
-const ENABLED=new Set(['settings','metafield','search']);
+const ENABLED=new Set(['settings','metafield','search','storefront']);
 const ACTIVE='settings';
 let col=false;
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -167,6 +168,7 @@ function renderNav(){
       if(v==='settings')location.href='index.html';
       else if(v==='metafield')location.href='Metafield.html';
       else if(v==='search')location.href='Search.html';
+      else if(v==='storefront')location.href='StoreFront.html';
     };
   });
   updateSb();
@@ -184,15 +186,26 @@ const tglVariant=$('tgl-variant');
 tglVariant.onclick=()=>{tglVariant.classList.toggle('on');tglVariant.classList.toggle('off');};
 
 /* ---- Variant option dropdown ---- */
-const VARIANT_OPTIONS=['Color','Size','Title','Material'];
+const VARIANT_OPTIONS=['Color','Size','Title','Material','Style','Pattern'];
 let selectedOpts=new Set();
 let dropOpen=false;
 
 function setDropOpen(open){
   dropOpen=open;
-  $('opt-dropdown').classList.toggle('hidden',!open);
+  const drop=$('opt-dropdown');
+  if(open){
+    const r=$('opt-trigger').getBoundingClientRect();
+    drop.style.position='fixed';
+    drop.style.top=(r.bottom+4)+'px';
+    drop.style.left=r.left+'px';
+    drop.style.width=r.width+'px';
+    drop.style.right='auto';
+    drop.classList.remove('hidden');
+    renderDropdown();
+  }else{
+    drop.classList.add('hidden');
+  }
   $('opt-chevron').style.transform=open?'rotate(180deg)':'rotate(0deg)';
-  if(open)renderDropdown();
 }
 
 function renderDropdown(){
