@@ -169,11 +169,11 @@ const IC={
 };
 const NAV=[
   {id:'filter',label:'Filter'},{id:'search',label:'Search'},
-  {id:'metafield',label:'Metafield'},{id:'ymm',label:'Year Make Model'},
+  {id:'metafield',label:'Metafield'},
   {id:'grid',label:'Filter & Product Grid Design'},{id:'settings',label:'Settings'},
   {id:'analytics',label:'Analytics'},{id:'advanced',label:'Advanced Features'},
 ];
-const ENABLED=new Set(['settings','metafield','ymm']);
+const ENABLED=new Set(['settings','metafield','search']);
 const ACTIVE='metafield';
 let col=false;
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -186,7 +186,7 @@ function renderNav(){
     if(ENABLED.has(b.dataset.nav))b.onclick=()=>{
       const v=b.dataset.nav;
       if(v==='settings')location.href='index.html';
-      else if(v==='ymm')location.href='YearMakeModel.html';
+      else if(v==='search')location.href='Search.html';
     };
   });
   updateSb();

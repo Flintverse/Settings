@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Translate – Findter Filter &amp; Search</title>
+<title>Separated Variant Products – Findter Filter &amp; Search</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 --bg:rgba(241,241,241,1);--sf:#fff;--sf-hov:rgba(247,247,247,1);--sf-act:rgba(243,243,243,1);
 --fill:#303030;--fill-hov:#1a1a1a;--fill-t:rgba(0,0,0,.02);
 --text:rgba(48,48,48,1);--text2:rgba(97,97,97,1);--textd:rgba(181,181,181,1);--lnk:rgba(0,91,211,1);
---bdr:rgba(227,227,227,1);--bdr-foc:rgba(0,91,211,1);--crit:rgba(181,38,11,1);
+--bdr:rgba(227,227,227,1);--bdr-foc:rgba(0,91,211,1);
 --r1:4px;--r2:8px;--r3:12px;
 --sh1:0px 1px 0px 0px rgba(26,26,26,.07);
 --sh3:0px 4px 6px -2px rgba(26,26,26,.2);
@@ -50,14 +50,23 @@ a{color:var(--lnk)}
 .back-a{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--r2);text-decoration:none;border:1px solid var(--bdr);background:var(--sf);color:var(--text2);box-shadow:var(--sh1);flex-shrink:0;transition:background .1s}
 .back-a:hover{background:var(--sf-hov)}
 .card{background:var(--sf);border-radius:var(--r2);box-shadow:var(--sh3);overflow:hidden}
-.inp{width:100%;border:1px solid var(--bdr);border-radius:var(--r2);padding:7px 12px;font-family:var(--ff);font-size:13px;color:var(--text);background:var(--sf);outline:none;transition:border-color .1s,box-shadow .1s}
-.inp::placeholder{color:var(--textd)}
-.inp:focus{border-color:var(--bdr-foc);box-shadow:0 0 0 3px rgba(0,91,211,.2)}
-.tabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--bdr);padding:0 16px;gap:4px}
-.tab{padding:10px 12px;font-size:13px;font-weight:450;color:var(--text2);border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:color .1s;font-family:var(--ff)}
-.tab:hover{color:var(--text)}.tab.act{color:var(--text);font-weight:650;border-bottom-color:var(--fill)}
+.card-hd{padding:16px;border-bottom:1px solid var(--bdr)}
+.card-hd-ttl{font-size:13px;font-weight:650}
+.card-hd-sub{font-size:12px;color:var(--text2);margin-top:2px}
+.card-bd{padding:16px;display:flex;flex-direction:column;gap:16px}
+.srch{display:flex;align-items:center;gap:8px;border:1px solid var(--bdr);border-radius:var(--r2);padding:7px 12px;background:var(--sf);transition:border-color .1s,box-shadow .1s;cursor:pointer}
+.srch:focus-within{border-color:var(--bdr-foc);box-shadow:0 0 0 3px rgba(0,91,211,.2)}
+.srch input{flex:1;border:none;outline:none;background:transparent;font-family:var(--ff);font-size:13px;color:var(--text);cursor:text}
+.srch input::placeholder{color:var(--textd)}
+.tgl{position:relative;display:inline-block;width:44px;height:24px;border:none;padding:0;cursor:pointer;border-radius:12px;outline:none;appearance:none;-webkit-appearance:none;transition:background .2s;flex-shrink:0;vertical-align:middle}
+.tgl:focus-visible{box-shadow:0 0 0 3px rgba(0,91,211,.25)}
+.tgl.on{background:var(--fill)}.tgl.off{background:rgba(204,204,204,1)}
+.tgl-th{display:block;position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.3);transition:transform .2s;pointer-events:none}
+.tgl.on .tgl-th{transform:translateX(20px)}
+.tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:var(--r1);background:var(--sf-act);font-size:12px;font-weight:550;color:var(--text)}
+.fhint{font-size:12px;color:var(--text2);margin-top:3px}
 .hidden{display:none!important}
-.mt3{margin-top:12px}.mt4{margin-top:16px}.mt5{margin-top:20px}
+.mt4{margin-top:16px}.mt5{margin-top:20px}
 .frow{display:flex;gap:8px}.fend{justify-content:flex-end}
 </style>
 </head>
@@ -75,25 +84,58 @@ a{color:var(--lnk)}
   </aside>
   <main class="main">
     <div class="pg">
+
+      <!-- Page header -->
       <div style="display:flex;align-items:center;gap:12px">
         <a href="index.html" class="back-a" title="Back to Settings">
           <svg class="ic" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M17 10a.75.75 0 0 1-.75.75H5.56l2.72 2.72a.75.75 0 1 1-1.06 1.06l-4-4a.75.75 0 0 1 0-1.06l4-4a.75.75 0 0 1 1.06 1.06L5.56 9.25H16.25A.75.75 0 0 1 17 10Z" fill="currentColor"/></svg>
         </a>
-        <div>
-          <h1 style="font-size:1.25rem;font-weight:650;line-height:1.3">Translate</h1>
-          <p style="font-size:13px;color:var(--text2);margin-top:2px">Customize the text labels shown to shoppers in your store.</p>
+        <h1 style="font-size:1.25rem;font-weight:650;line-height:1.3">Separated variant products</h1>
+      </div>
+
+      <!-- Enable card -->
+      <div class="card mt5">
+        <div class="card-bd">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:16px">
+            <div>
+              <p style="font-weight:550;font-size:13px">Enable to show variant as separate product</p>
+              <p class="fhint">When enabled, each variant appears as its own product in collections.</p>
+            </div>
+            <button type="button" id="tgl-variant" class="tgl off"><span class="tgl-th"></span></button>
+          </div>
         </div>
       </div>
 
-      <div class="card mt5">
-        <div class="tabs" id="subtab-bar"></div>
-        <div id="fields-area"></div>
+      <!-- Separate by options card -->
+      <div class="card mt4">
+        <div class="card-hd">
+          <p class="card-hd-ttl">Separate product by options</p>
+          <p class="card-hd-sub">Choose which variant options are used to split products.</p>
+        </div>
+        <div class="card-bd">
+          <div id="opt-wrap" style="position:relative">
+            <!-- selected tags row -->
+            <div id="selected-tags" style="display:none;flex-wrap:wrap;gap:4px;margin-bottom:8px"></div>
+            <!-- search / trigger -->
+            <div class="srch" id="opt-trigger">
+              <svg class="ic" style="color:var(--textd)" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M13.74 12.68a6.5 6.5 0 1 1 1.06-1.06l3.26 3.27a.75.75 0 1 1-1.06 1.06l-3.26-3.27Zm.76-5.18a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z" fill="currentColor"/></svg>
+              <input id="opt-input" type="text" placeholder="Search variant option" autocomplete="off">
+              <svg class="ic" id="opt-chevron" style="color:var(--textd);transition:transform .15s" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" fill="currentColor"/></svg>
+            </div>
+            <!-- dropdown panel -->
+            <div id="opt-dropdown" class="hidden" style="position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--sf);border:1px solid var(--bdr);border-radius:var(--r2);box-shadow:var(--sh3);z-index:20;max-height:220px;overflow-y:auto">
+              <div id="opt-list"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
+      <!-- Save / Cancel -->
       <div class="frow fend mt4">
-        <button id="cancel-translate" class="btn btn-s">Cancel</button>
-        <button id="save-translate" class="btn btn-p">Save</button>
+        <button id="cancel-variant" class="btn btn-s">Cancel</button>
+        <button id="save-variant" class="btn btn-p">Save</button>
       </div>
+
     </div>
   </main>
 </div>
@@ -137,93 +179,84 @@ function updateSb(){
 }
 $('sidebar-toggle').onclick=()=>{col=!col;updateSb();};
 
-const SUBTABS=[
-  {id:'product',label:'Product'},
-  {id:'search', label:'Search'},
-  {id:'filter', label:'Filter'},
-  {id:'sort',   label:'Sort'},
-  {id:'ymm',    label:'Year Make Model Widget'},
-];
-const FIELDS={
-  product:[
-    {key:'add_to_cart',  label:'Add to cart'},{key:'sold_out',    label:'Sold out'},
-    {key:'out_of_stock', label:'Out of stock'},{key:'sale',        label:'Sale'},
-    {key:'new',          label:'New'},         {key:'quick_view',  label:'Quick view'},
-    {key:'view_details', label:'View details'},{key:'from',        label:'From'},
-    {key:'compare_at',   label:'Compare at'},  {key:'only_x_left', label:'Only X left'},
-    {key:'free_shipping',label:'Free shipping'},
-  ],
-  search:[
-    {key:'search_placeholder',label:'Search (placeholder)'},{key:'no_results',   label:'No results found'},
-    {key:'results_for',       label:'Search results for'}, {key:'did_you_mean',  label:'Did you mean?'},
-    {key:'view_all',          label:'View all results'},    {key:'products',      label:'Products'},
-    {key:'collections',       label:'Collections'},         {key:'pages',         label:'Pages'},
-    {key:'clear_search',      label:'Clear search'},        {key:'suggestions',   label:'Suggestions'},
-  ],
-  filter:[
-    {key:'filters',     label:'Filters'},      {key:'filter',      label:'Filter'},
-    {key:'clear_all',   label:'Clear all'},     {key:'apply',       label:'Apply'},
-    {key:'show_results',label:'Show results'},  {key:'price',       label:'Price'},
-    {key:'from',        label:'From'},          {key:'to',          label:'To'},
-    {key:'in_stock',    label:'In stock'},      {key:'available',   label:'Available'},
-    {key:'more',        label:'More'},          {key:'less',        label:'Less'},
-    {key:'selected',    label:'Selected'},      {key:'remove',      label:'Remove'},
-  ],
-  sort:[
-    {key:'sort_by',     label:'Sort by'},       {key:'featured',    label:'Featured'},
-    {key:'best_selling',label:'Best Selling'},   {key:'newest',      label:'Newest'},
-    {key:'oldest',      label:'Oldest'},         {key:'discount',    label:'% Discount'},
-    {key:'az',          label:'Alphabetical: A-Z'},{key:'za',        label:'Alphabetical: Z-A'},
-    {key:'price_asc',   label:'Price: Low to High'},{key:'price_desc',label:'Price: High to Low'},
-    {key:'inventory',   label:'Stock Availability'},
-  ],
-  ymm:[
-    {key:'year',          label:'Year'},          {key:'make',          label:'Make'},
-    {key:'model',         label:'Model'},          {key:'select_year',   label:'Select Year'},
-    {key:'select_make',   label:'Select Make'},    {key:'select_model',  label:'Select Model'},
-    {key:'find_parts',    label:'Find parts'},     {key:'reset',         label:'Reset'},
-    {key:'fits',          label:'Fits your vehicle'},{key:'does_not_fit',label:'Does not fit'},
-    {key:'select_vehicle',label:'Select a vehicle'},{key:'change_vehicle',label:'Change vehicle'},
-  ],
-};
+/* ---- Toggle ---- */
+const tglVariant=$('tgl-variant');
+tglVariant.onclick=()=>{tglVariant.classList.toggle('on');tglVariant.classList.toggle('off');};
 
-let activeSubtab='product';
-function emptyTranslations(){
-  const t={};
-  for(const tab of SUBTABS){t[tab.id]={};for(const f of FIELDS[tab.id])t[tab.id][f.key]='';}
-  return t;
-}
-let workingTranslations=emptyTranslations();
-let savedTranslations=emptyTranslations();
+/* ---- Variant option dropdown ---- */
+const VARIANT_OPTIONS=['Color','Size','Title','Material'];
+let selectedOpts=new Set();
+let dropOpen=false;
 
-function renderSubtabs(){
-  $('subtab-bar').innerHTML=SUBTABS.map(t=>`<button data-tab="${t.id}" class="tab${t.id===activeSubtab?' act':''}">${escapeHtml(t.label)}</button>`).join('');
-  $('subtab-bar').querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{flushFields();activeSubtab=b.dataset.tab;renderSubtabs();renderFields();});
-}
-function renderFields(){
-  const fields=FIELDS[activeSubtab];
-  const vals=workingTranslations[activeSubtab];
-  $('fields-area').innerHTML=fields.map(f=>`
-    <div style="display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--bdr)">
-      <span style="width:192px;flex-shrink:0;font-weight:550;font-size:13px">${escapeHtml(f.label)}</span>
-      <svg style="width:16px;height:16px;fill:var(--textd);flex-shrink:0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.69L11.72 6.53a.75.75 0 0 1 1.06-1.06l4 4a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 1 1-1.06-1.06l2.72-2.72H3.75A.75.75 0 0 1 3 10Z" fill="currentColor"/></svg>
-      <input data-key="${f.key}" type="text" value="${escapeHtml(vals[f.key]||'')}" placeholder="Translation…" class="inp" style="flex:1">
-    </div>`).join('');
-  const rows=$('fields-area').children;
-  if(rows.length)rows[rows.length-1].style.borderBottom='none';
-}
-function flushFields(){
-  $('fields-area').querySelectorAll('[data-key]').forEach(inp=>{workingTranslations[activeSubtab][inp.dataset.key]=inp.value;});
+function setDropOpen(open){
+  dropOpen=open;
+  $('opt-dropdown').classList.toggle('hidden',!open);
+  $('opt-chevron').style.transform=open?'rotate(180deg)':'rotate(0deg)';
+  if(open)renderDropdown();
 }
 
-$('save-translate').onclick=()=>{
-  flushFields();savedTranslations=JSON.parse(JSON.stringify(workingTranslations));
-  const btn=$('save-translate');btn.innerHTML=IC.chk+' Saved';
+function renderDropdown(){
+  const filter=$('opt-input').value.toLowerCase();
+  const visible=VARIANT_OPTIONS.filter(o=>o.toLowerCase().includes(filter));
+  if(!visible.length){
+    $('opt-list').innerHTML=`<p style="padding:10px 12px;font-size:13px;color:var(--text2)">No options found</p>`;
+    return;
+  }
+  $('opt-list').innerHTML=visible.map((o,i)=>`
+    <label style="display:flex;align-items:center;gap:8px;padding:9px 12px;cursor:pointer;font-size:13px;${i<visible.length-1?'border-bottom:1px solid var(--bdr)':''}">
+      <input type="checkbox" data-opt="${escapeHtml(o)}" ${selectedOpts.has(o)?'checked':''}
+             style="width:16px;height:16px;accent-color:var(--fill);cursor:pointer;flex-shrink:0">
+      ${escapeHtml(o)}
+    </label>`).join('');
+  $('opt-list').querySelectorAll('[data-opt]').forEach(chk=>{
+    chk.onchange=()=>{
+      chk.checked?selectedOpts.add(chk.dataset.opt):selectedOpts.delete(chk.dataset.opt);
+      renderTags();
+    };
+  });
+}
+
+function renderTags(){
+  const el=$('selected-tags');
+  if(!selectedOpts.size){el.style.display='none';return;}
+  el.style.display='flex';
+  el.innerHTML=[...selectedOpts].map(o=>
+    `<span class="tag">${escapeHtml(o)}<button data-rm="${escapeHtml(o)}" style="background:none;border:none;cursor:pointer;color:var(--textd);margin-left:4px;font-size:15px;line-height:1;padding:0" title="Remove">×</button></span>`
+  ).join('');
+  el.querySelectorAll('[data-rm]').forEach(b=>{
+    b.onclick=e=>{e.stopPropagation();selectedOpts.delete(b.dataset.rm);renderTags();if(dropOpen)renderDropdown();};
+  });
+}
+
+$('opt-input').addEventListener('focus',()=>setDropOpen(true));
+$('opt-input').addEventListener('input',()=>{if(!dropOpen)setDropOpen(true);else renderDropdown();});
+$('opt-trigger').addEventListener('mousedown',e=>{
+  if(e.target===$('opt-input'))return;
+  e.preventDefault();
+  dropOpen?setDropOpen(false):$('opt-input').focus();
+});
+document.addEventListener('click',e=>{if(!$('opt-wrap').contains(e.target))setDropOpen(false);});
+
+/* ---- Save / Cancel ---- */
+function snapshot(){
+  return{enabled:tglVariant.classList.contains('on'),opts:new Set(selectedOpts)};
+}
+function restore(s){
+  tglVariant.classList.toggle('on',s.enabled);
+  tglVariant.classList.toggle('off',!s.enabled);
+  selectedOpts=new Set(s.opts);
+  renderTags();
+  if(dropOpen)renderDropdown();
+}
+let saved=snapshot();
+$('save-variant').onclick=()=>{
+  saved=snapshot();
+  const btn=$('save-variant');btn.innerHTML=IC.chk+' Saved';
   setTimeout(()=>{btn.innerHTML='Save';},1500);
 };
-$('cancel-translate').onclick=()=>{workingTranslations=JSON.parse(JSON.stringify(savedTranslations));renderFields();};
+$('cancel-variant').onclick=()=>restore(saved);
 
-renderNav();renderSubtabs();renderFields();
+renderNav();
 </script>
 </body>
 </html>
